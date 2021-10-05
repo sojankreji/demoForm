@@ -46,9 +46,23 @@
             Invalid email id format
           </mat-error>
         </mat-form-field>
-
-
       </div>
+      <div
+        fxLayout="row"
+        fxLayoutGap="10px"
+        fxLayoutAlign="start stretch"
+        *ngFor="
+          let lessonForm of userForm.get('tags')['controls'];
+          let i = index
+        "
+      >
+        <mat-form-field formArrayName="tags">
+          <div [formGroupName]="i">
+            <input formControlName="tagname" matInput placeholder="tag name" />
+          </div>
+        </mat-form-field>
+      </div>
+      <button mat-button (click)="addTag()">add Tag</button>
     </div>
     <div mat-dialog-actions>
       <div fxFlex></div>
