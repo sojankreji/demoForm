@@ -9,16 +9,6 @@ import { User } from '../models/User';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements OnInit {
-  // userForm = this.fb.group({
-  //   userId: [0, [Validators.required]],
-  //   loginId: ['', [Validators.required]],
-  //   userName: ['', [Validators.required]],
-  //   email: ['', [Validators.required, Validators.email]],
-  //   active: [true],
-  // });
-
-  // //user = new User(0,false);
-  // private subscriptions = new SubSink();
 
   constructor() {}
 
