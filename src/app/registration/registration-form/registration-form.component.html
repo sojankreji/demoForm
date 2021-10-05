@@ -1,0 +1,50 @@
+<mat-card>
+  <mat-card-header fxLayout="row">
+    <h1 mat-dialog-title>User Registration</h1>
+  </mat-card-header>
+
+  <form [formGroup]="userForm" class="normal-form" (ngSubmit)="onSubmit()">
+    <div mat-dialog-content>
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch">
+        <mat-form-field>
+          <input formControlName="username" matInput placeholder="User Name*" />
+          <mat-error
+            *ngIf="
+              userForm.controls['username'].errors?.required &&
+              userForm.controls['username'].touched
+            "
+          >
+            User name is mandatory
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch">
+        <mat-form-field>
+          <input formControlName="email" matInput placeholder="Email*" />
+          <mat-error
+            *ngIf="
+              userForm.controls['email'].errors?.required &&
+              userForm.controls['email'].touched
+            "
+          >
+            Email id is mandatory</mat-error
+          >
+          <mat-error
+            *ngIf="
+              userForm.controls['email'].errors?.pattern &&
+              userForm.controls['email'].touched
+            "
+          >
+            Invalid email id format
+          </mat-error>
+        </mat-form-field>
+
+
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <div fxFlex></div>
+      <button mat-raised-button type="submit">Save</button>
+    </div>
+  </form>
+</mat-card>
