@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { DynamicgridLibModule } from 'dynamicgrid-lib';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +24,6 @@ import { RegistrationFormComponent } from './registration/registration-form/regi
     MatFormFieldModule,
     MatInputModule,
     AppRoutingModule,
-    DynamicgridLibModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatCardModule,
