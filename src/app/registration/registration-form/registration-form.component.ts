@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User';
+import { UserValidator } from '../validators/userValidator';
 
 @Component({
   selector: 'app-registration-form',
@@ -18,8 +19,10 @@ export class RegistrationFormComponent implements OnInit {
   ngOnInit(): void {}
 
   buildForm() {
+
+    //note that the validators are in array of pos 1 , if validators need to check with anby external source use pos 2
     this.userForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.required,UserValidator.startsWithS] ],
       email: ['', [Validators.required,Validators.email]],
     });
   }
