@@ -21,7 +21,6 @@
     "@angular/platform-browser": "~12.2.8",
     "@angular/platform-browser-dynamic": "~12.2.8",
     "@angular/router": "~12.2.8",
-    "dynamicgrid-lib": "file:dependencies/dynamicgrid-lib-0.0.1.tgz",
     "rxjs": "~6.6.0",
     "subsink": "^1.0.2",
     "tslib": "^2.0.0",
