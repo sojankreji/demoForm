@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { User } from 'src/app/models/User';
+import { User } from 'src/app/state/user/user.model';
 import { UserValidator } from '../validators/userValidator';
 
 @Component({

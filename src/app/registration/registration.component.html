@@ -1,2 +1,3 @@
 <app-registration-form (onSave)="onUserAdded($event)"></app-registration-form>
 
+<user-table [users]="registerdUsers$ | async"></user-table>

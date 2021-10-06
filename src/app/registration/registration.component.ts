@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-
-import { User } from '../models/User';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { addUser } from '../state/user/user.action';
+import { User } from '../state/user/user.model';
+import  * as UserSelector  from '../state/user/user.selector';
 
 @Component({
   selector: 'app-registration',
@@ -10,15 +12,17 @@ import { User } from '../models/User';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() {}
+  registerdUsers$:Observable<Array<User>>;
+
+  constructor(private store:Store) {}
 
   ngOnInit(): void {
-    var user = new User("name","email",["1"]);
-    console.log(user);
+    this.registerdUsers$ = this.store.select(UserSelector.selectRegisterdUsers);
   }
 
   onUserAdded(user:User){
     //this is where you would save it to store
+    this.store.dispatch(addUser({user}))
     console.table(user);
   }
 

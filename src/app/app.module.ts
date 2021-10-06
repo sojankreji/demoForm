@@ -12,12 +12,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import {  MatButtonModule } from '@angular/material/button';
 import { RegistrationFormComponent } from './registration/registration-form/registration-form.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './state/app-reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { UserTableComponent } from './registration/user-table/user-table.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    UserTableComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +37,12 @@ import { RegistrationFormComponent } from './registration/registration-form/regi
     MatCardModule,
     MatIconModule,
     MatButtonModule,
+    MatTableModule,
+    MatMenuModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
