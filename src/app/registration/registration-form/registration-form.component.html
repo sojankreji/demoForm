@@ -24,6 +24,14 @@
           >
             User name should start with s
           </mat-error>
+          <mat-error
+            *ngIf="
+              userForm.controls['username'].errors &&
+              userForm.controls['username'].touched
+            "
+          >
+           {{userForm.controls['username'].errors | json}}
+          </mat-error>
         </mat-form-field>
       </div>
       <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch">
