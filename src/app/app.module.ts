@@ -10,22 +10,33 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import {  MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { RegistrationFormComponent } from './registration/registration-form/registration-form.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './state/app-reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { UserTableComponent } from './registration/user-table/user-table.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import {
+  RouterStateSerializer,
+  StoreRouterConnectingModule,
+} from '@ngrx/router-store';
+import { CustomSerializer } from './state/app-reducers/router-reducer';
+import { PostsComponent } from './posts/posts/posts.component';
+import { PostsListComponent } from './posts/posts-list/posts-list.component';
+import { EffectsModule } from '@ngrx/effects';
+import { PostEffects } from './state/post/post.effect';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     RegistrationFormComponent,
-    UserTableComponent
+    UserTableComponent,
+    PostsComponent,
+    PostsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,12 +50,15 @@ import {MatMenuModule} from '@angular/material/menu';
     MatButtonModule,
     MatTableModule,
     MatMenuModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
+    StoreModule.forRoot(reducers, {}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot(),
+    EffectsModule.forRoot([PostEffects]),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
