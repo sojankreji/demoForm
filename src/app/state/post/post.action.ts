@@ -1,12 +1,13 @@
 import { createAction, props } from '@ngrx/store';
-import { type } from 'os';
 import { Post } from './post.model';
-import { ofType } from '@ngrx/effects';
 
 export const ADD_POST = '[Post] Add Post';
 export const LOAD_POST = '[Post] Load Post';
 export const LOAD_POST_SUCCESS = '[Post] Load Post Success';
 export const LOAD_POST_FAILED = '[Post] Load Post Failed';
+export const LOAD_SELECTED_POST = '[Post] Load Selected Post';
+export const LOAD_SELECTED_POST_SUCCESS = '[Post] Load Selected Post Success';
+export const LOAD_SELECTED_POST_FAILED = '[Post] Load Selected Post Failed';
 
 export const addPost = createAction(ADD_POST, props<{ post: Post }>());
 
@@ -22,4 +23,17 @@ export const loadPostFailed = createAction(
   props<{ msg: string }>()
 );
 
-// export  type ACTIONS  =  ofType addPost //| typeof  loadPost |typeof  loadPostSuccess | typeof loadPostFailed;
+export const loadSelectedPost = createAction(
+  LOAD_SELECTED_POST,
+  // props<{ post: Post }>()
+);
+
+export const loadSelectedPostSuccess = createAction(
+  LOAD_SELECTED_POST_SUCCESS,
+  props<{ post: Post }>()
+);
+
+export const loadSelectedPostFailed = createAction(
+  LOAD_SELECTED_POST_FAILED,
+  props<{ msg: string }>()
+);

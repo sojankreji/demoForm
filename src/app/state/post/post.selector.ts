@@ -1,15 +1,33 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { RouterReducerState } from '@ngrx/router-store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { Post } from '.';
+import { getRouterState, RouterStateUrl } from '../app-reducers/router-reducer';
 import * as fromPost from '../post/post.reducer';
 
-export const selectPostState = createFeatureSelector<fromPost.State>(
-  "post"
-);
-
+export const selectPostState = createFeatureSelector<fromPost.State>('post');
 
 export const selectPosts = createSelector(
   selectPostState,
   (state: fromPost.State) => state.posts
 );
+
+export const selectSelectedPost = createSelector(
+  selectPostState,
+  (state: fromPost.State) => state.slectedPost.post
+);
+export const selectSelectedPostState = createSelector(
+  selectPostState,
+  (state: fromPost.State) => state.slectedPost.isLoaded
+);
+export const isSelectedPostLoaded = createSelector(
+  selectSelectedPost,
+  getRouterState,
+  (state: Post,routerState:RouterReducerState<RouterStateUrl>) => {
+    return state?.id==routerState.state.params['postId']
+  }
+);
+
+
 
 // export const selectRegisterdUser = (name:string) => createSelector(
 //   selectRegisterdUsers,

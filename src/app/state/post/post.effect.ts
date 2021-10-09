@@ -1,20 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { EMPTY } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
-import { PostService } from 'src/app/post/post.service';
-import * as PostActions from "./post.action";
+import { Store } from '@ngrx/store';
+import { debounceTime, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import { PostService } from 'src/app/posts/post.service';
+import * as PostActions from './post.action';
+import * as PostSelector from './post.selector';
+import { Post } from './post.model';
+import { getRouterState } from '../app-reducers/router-reducer';
 
 @Injectable()
 export class PostEffects {
-  loadMovies$ = createEffect(() =>
+  loadPost$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(PostActions.LOAD_POST) )
+      ofType(PostActions.loadPost),
+      debounceTime(300),
+      switchMap((data) => {
+        return this.postService.searchPosts('').pipe(
+          map((x:Post[])=>{
+            return  PostActions.loadPostSuccess({post:x})
+          })
+        )
+      })
+    )
+  );
+  loadSelectdPost$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PostActions.loadSelectedPost),
+      withLatestFrom(this.store.select(getRouterState)),
+      switchMap(([data,routeState]) => {
+        return this.postService.getPost(routeState.state.params['postId']).pipe(
+          map((x:Post)=>{
+            return  PostActions.loadSelectedPostSuccess({post:x})
+          })
+        )
+      })
+    )
   );
 
-  constructor(
-    private actions$: Actions,
-    private moviesService: PostService
-  ) {}
+  constructor(private actions$: Actions, private postService: PostService,private store:Store) {}
 }

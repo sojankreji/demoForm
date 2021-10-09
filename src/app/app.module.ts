@@ -28,6 +28,10 @@ import { PostsComponent } from './posts/posts/posts.component';
 import { PostsListComponent } from './posts/posts-list/posts-list.component';
 import { EffectsModule } from '@ngrx/effects';
 import { PostEffects } from './state/post/post.effect';
+import {  HttpClientModule } from '@angular/common/http';
+import { PostItemComponent } from './posts/post-item/post-item.component';
+import { PostDetailComponent } from './posts/post-detail/post-detail.component';
+import { PostDetailViewerComponent } from './post/post-detail-viewer/post-detail-viewer.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +41,16 @@ import { PostEffects } from './state/post/post.effect';
     UserTableComponent,
     PostsComponent,
     PostsListComponent,
+    PostItemComponent,
+    PostDetailComponent,
+    PostDetailViewerComponent,
   ],
   imports: [
     BrowserModule,
     MatFormFieldModule,
     MatInputModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatCardModule,
@@ -55,7 +63,7 @@ import { PostEffects } from './state/post/post.effect';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({stateKey: 'routerReducer'}),
     EffectsModule.forRoot([PostEffects]),
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomSerializer }],

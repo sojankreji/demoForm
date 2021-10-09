@@ -19,7 +19,7 @@ export interface State {
 
 export const reducers: ActionReducerMap<State> = {
   users: fromUser.reducer,
-  routerReducer: fromRouter.routerReducer,
+  routerReducer : fromRouter.routerReducer,
   post:fromPost.reducer
 };
 

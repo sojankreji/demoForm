@@ -1,3 +1,5 @@
 <app-registration-form [uniqeValidator]="uniqueNameVlidator" (onSave)="onUserAdded($event)"></app-registration-form>
+<a routerLink="/posts">skip</a>
 
 <user-table [users]="registerdUsers$ | async"></user-table>
+

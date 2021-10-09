@@ -1,6 +1,3 @@
 export class Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
+  constructor(public userId,public id, public title,public body){}
 }

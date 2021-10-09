@@ -27,7 +27,7 @@ export class CustomSerializer
     while (state.firstChild) {
       state = state.firstChild;
     }
-    const { params } = state.params;
+    const { params } = state;
     return { url, queryParams, params };
   }
 }

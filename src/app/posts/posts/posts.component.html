@@ -1,1 +1,2 @@
-<posts-list [posts]="posts$ | async"></posts-list>
+<posts-list (postSelected)="postSelected($event)" [posts]="posts$ | async"></posts-list>
+
