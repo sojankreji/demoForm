@@ -23,7 +23,8 @@ export const isSelectedPostLoaded = createSelector(
   selectSelectedPost,
   getRouterState,
   (state: Post,routerState:RouterReducerState<RouterStateUrl>) => {
-    return state?.id==routerState.state.params['postId']
+    var x =  state?state?.id==routerState.state.params['postId']:false;
+    return x;
   }
 );
 
